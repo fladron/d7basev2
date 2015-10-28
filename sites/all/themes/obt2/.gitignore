@@ -1,0 +1,8 @@
+# Ignore sass cache
+.sass-cache 
+.sass-cache/*
+
+# ignore css and sourcemap files
+# we should compile sass in every environment
+css/*.css
+css/*.css.map

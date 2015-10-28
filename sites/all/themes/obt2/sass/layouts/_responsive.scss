@@ -1,0 +1,41 @@
+/**
+ * @file
+ * Positioning for a responsive layout.
+ *
+ * Define CSS classes to create a fluid grid layout with optional sidebars
+ * depending on whether blocks are placed in the left or right sidebars.
+ * 
+ * This theme uses an OBT2 Simple Grid System
+ */
+
+$wrapper_width: 1200px;
+$wrapper_horizontal_padding: 30px; // when screen narrower than $wrapper_width
+
+/* menu breakpoints */
+$mini_menu_width: 1100px; // the main menu turns smaller
+$mobile_menu_min_width: 920px; // the main menu dissapppears and the mobile menu appears
+
+/* all the necessary breakpoints */
+$huge_width: 1600px;
+$big_width: 1200px;
+$normal_width: 980px;
+$medium_width: 860px;
+$mini_width: 650px;
+$micro_width: 480px;
+
+/**
+ * Centers the page
+ */
+#header,
+#main,
+#footer {
+	> .inner {
+		margin-left: auto;
+	  margin-right: auto;
+	  max-width: $wrapper_width;
+	  @media screen and (max-width: $wrapper_width) {
+	  	padding-left: $wrapper_horizontal_padding;
+	  	padding-right: $wrapper_horizontal_padding;
+	  }
+	}
+}

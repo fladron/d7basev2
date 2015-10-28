@@ -1,0 +1,6 @@
+name = SITEID
+description = SITEID site control
+core = 7.x
+package = Omitsis
+dependencies[] = oh
+dependencies[] = SITEID_config

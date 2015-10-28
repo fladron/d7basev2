@@ -1,0 +1,190 @@
+<?php
+define('MYSITE_MODULE_NAME', basename(__FILE__, '.module'));
+
+/**
+ * Implements hook_menu().
+ */
+function SITEID_menu() {
+  $items = array();
+
+  $items['oasync/test/%'] = array(
+    'page callback' => 'SITEID_test',
+    'type' => MENU_CALLBACK,
+    'page arguments' => array(2),
+    'access arguments' => array('access content'),
+  );
+
+  return $items;
+}
+
+/**
+ *  Implementation of hook_form_alter().
+ */
+function SITEID_form_alter(&$form, &$form_state, $form_id) {
+  switch ($form_id) {
+    case 'contact_site_form':
+      // remove the "send yourself a copy" checkbox
+      unset($form['copy']);
+      break;
+  }
+}
+
+/**
+ * Implements hook_node_view().
+ */
+function SITEID_node_view($node, $view_mode) {
+  // Just make a blog menu item active during viewing blog post detailed page.
+  /*$menu_name = 'main-menu';
+  if ($view_mode == 'full' && !empty($node->type)){
+    switch ($node->type){
+      case 'post':
+        $path = 'node/5';
+        break;
+    }
+    if (isset($path)) menu_tree_set_path($menu_name, $path);
+  }*/
+}
+
+/**
+ * Implements hook_block_info().
+ */
+function SITEID_block_info() {
+  $blocks['contact_form'] = array(
+    'info'=> MYSITE_MODULE_NAME . ': Contact form',
+    'cache' => DRUPAL_CACHE_PER_ROLE, //Default
+  );
+  $blocks['social_networks_links'] = array(
+    'info'=> MYSITE_MODULE_NAME . ': Social Networks links',
+    'cache' => DRUPAL_CACHE_PER_ROLE, //Default
+  );
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ *
+ * Prepares the contents of the block.
+ */
+function SITEID_block_view($delta = '') {
+  $block = array();
+  switch($delta){
+    case 'contact_form':
+      $block['subject'] = '';
+      $block['content'] = SITEID_render_contact_form();
+      break;
+    case 'social_networks_links':
+      $block['subject'] = '';
+      $block['content'] = SITEID_render_social_network_links();
+      break;
+  }
+  return $block;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function SITEID_theme($existing, $type, $theme, $path) {
+  return array(
+    'social_network_links' => array(
+      'variables' => array('list' => array()),
+      'template' => 'theme/social_network_links',
+    ),
+    'share_links' => array(
+      'variables' => array('list' => array(), 'current_url' => ''),
+      'template' => 'theme/share_links',
+    ),
+  );
+}
+
+/*
+* Simple Test functions
+*/
+function SITEID_test($type){
+  $response = 'No test selected, or test invalid';
+  switch ($type){
+    case 'SOME_TEST':
+      $response = array(
+        //'SOME_RESPONSE' => SOME_METHOD_THAT_RETURNS_SOMETHING(),
+      );
+      break;
+  }
+  drupal_json_output($response);
+  drupal_exit();
+}
+
+/**
+ * Returns the contact form
+ */
+function SITEID_render_contact_form() {
+  module_load_include('inc', 'contact', 'contact.pages');
+  $contact_form = drupal_get_form('contact_site_form');
+  $contact_form['#prefix'] = theme('status_messages');
+  return render($contact_form);
+}
+
+/**
+ * Renders social networks links
+ */
+function SITEID_render_social_network_links() {
+  $final_list = array();
+  $social_types = SITEID_config_get_social_types();
+  foreach ($social_types as $social_machine => $social_name) {
+    $field = 'social_' . $social_machine;
+    $social_url = variable_get('SITEID_config_' . $field, '');
+    if ($social_url != ''){
+      $final_list[] = array(
+        'machine_name' => $social_machine,
+        'name' => $social_name,
+        'url' => $social_url,
+      );
+    }
+  }
+  $variables = array(
+    'list' => $final_list,
+  );
+  return theme('social_network_links', $variables);
+}
+
+/**
+ * Renders social networks share links
+ */
+function SITEID_render_share_links($nid) {
+  $current_url = oh_get_absolute_path() . oh_get_node_path_alias($nid);
+  $final_list = array();
+  $social_links = array(
+    'twitter' => array(
+      'name' => 'Twitter',
+      'share_url' => 'https://twitter.com/intent/tweet?url=',
+      'label' => t("Tweet"),
+      'description' => t("Tweet"),
+    ),
+    'facebook' => array(
+      'name' => 'Facebook',
+      'share_url' => 'https://www.facebook.com/sharer/sharer.php?u=',
+      'label' => t("Share", array(), array('context' => 'Share links')),
+      'description' => t("Share on Facebook"),
+    ),
+  );
+  foreach ($social_links as $social_machine => $item) {
+    $new_item = $item;
+    $fa_name = 'icon-' . $social_machine; // font awesome class name: http://fortawesome.github.io/Font-Awesome/icons/
+    $new_item['machine_name'] = $social_machine;
+    $new_item['fa_name'] = $fa_name;
+    $final_list[] = $new_item;
+  }
+  $variables = array(
+    'list' => $final_list,
+    'current_url' => $current_url,
+  );
+  return theme('share_links', $variables);
+}
+
+/**
+* Removes format info from a form
+*/
+function _remove_format(&$form){
+  unset($form[LANGUAGE_NONE][0]['format']['format']);
+  unset($form[LANGUAGE_NONE][0]['format']['guidelines']);
+  unset($form[LANGUAGE_NONE][0]['format']['help']);
+  return $form;
+}
