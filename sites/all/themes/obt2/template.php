@@ -74,7 +74,7 @@ function obt2_preprocess_html(&$vars) {
   drupal_add_css('//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css', array('type' => 'external', 'group' => CSS_THEME));
 
   // external scripts
-  drupal_add_js(libraries_get_path('modernizr'). '/modernizr.custom.87176.js');
+  drupal_add_js(base_path() . path_to_theme() . '/js/vendor/modernizr.custom.87176.js', array('group' => JS_LIBRARY));
 
   // Touch screen icons
   /*$icon =  array(
