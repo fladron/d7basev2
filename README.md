@@ -15,7 +15,7 @@ Use drush for the following modules list to upload and enable them, like this (i
 
 Core-ish MODULE_NAME_LIST:
 
-  > admin_menu admin_views adminimal_admin_menu adminimal_theme chosen ckeditor ctools date entity entity_translation entityconnect entityreference epsacrop field_group honeypot i18n imce jquery_update l10n_update libraries link  module_filter nodequeue pathauto title token transliteration variable views views_bulk_operations
+  > admin_menu admin_views adminimal_admin_menu adminimal_theme chosen ckeditor ctools date entity entity_translation entityconnect entityreference epsacrop field_group honeypot i18n imce jquery_update l10n_update libraries link  module_filter nodequeue pathauto title token transliteration variable views views_bulk_operations webform_localization
 
 Core-ish LIBRARIES:
 
