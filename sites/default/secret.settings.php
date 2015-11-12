@@ -5,6 +5,7 @@
  */
 $conf['environment'] = 'dev';
 
+// Taken from: http://brockboland.com/drupaldork/2011/11/local-settings-development-sites
 // the database settings for this environment
 $databases = array (
   'default' => 
@@ -21,8 +22,6 @@ $databases = array (
     ),
   ),
 );
-
-// Taken from: http://brockboland.com/drupaldork/2011/11/local-settings-development-sites
 
 // Make sure I can always run update.php
 $update_free_access = FALSE;
