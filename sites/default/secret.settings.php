@@ -11,9 +11,9 @@ $databases = array (
   array (
     'default' => 
     array (
-      'database' => 'nouu2015',
-      'username' => 'nouu2015u',
-      'password' => 'R9yNPi4e6oPo',
+      'database' => 'DATABASE_NAME',
+      'username' => 'DATABASE_USER',
+      'password' => 'DATABASE_PASSWORD',
       'host' => 'localhost',
       'port' => '',
       'driver' => 'mysql',
