@@ -64,7 +64,7 @@ var config = {
 	  }
 
 	  // super labels
-    prepareSuperLabels();
+    //prepareSuperLabels();
 
     // overlay (fancybox)
 	  //$('.voluntaris-gallery > ul > li a').attr('rel', 'gallery').fancybox();
@@ -133,11 +133,11 @@ var config = {
 	  config.WINDOW_MEASURES = [window.innerWidth, window.innerHeight];
 	}
 
-	function prepareSuperLabels(){
+	/*function prepareSuperLabels(){
     $('form').not('#search-block-form, .search-form').superLabels({
       labelLeft: 12,
       labelTop: 10
     });
-  }
+  }*/
 
 })(jQuery, Drupal, this, this.document);
