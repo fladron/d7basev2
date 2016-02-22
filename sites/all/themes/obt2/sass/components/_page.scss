@@ -56,8 +56,8 @@
 }
 
 /* collapsible items */
-.collapsible {
-  .collapsible-btn {
+.simple-collapsible {
+  .simple-collapsible-btn {
     position: relative;
     width: 100%;
     display: block;
@@ -70,9 +70,9 @@
       right: 2px;
     }
   }
-  .collapsible-inner {}
+  .simple-collapsible-inner {}
   &[data-status="closed"] {
-    .collapsible-btn:after {
+    .simple-collapsible-btn:after {
       background-position: -200px 0;
     }
   }

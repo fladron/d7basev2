@@ -278,9 +278,9 @@ function debounce(fn, delay) {
     var self = this;
 
     this.init = function(){
-      self.$obj.addClass('collapsible');
-      self.$btn.addClass('collapsible-btn');
-      self.$collapsible.addClass('collapsible-inner');
+      self.$obj.addClass('simple-collapsible');
+      self.$btn.addClass('simple-collapsible-btn');
+      self.$collapsible.addClass('simple-collapsible-inner');
       self.$obj.attr('data-status', 'open');
       if (self.collapsed) self.collapse();
       self.prepareInteraction();
