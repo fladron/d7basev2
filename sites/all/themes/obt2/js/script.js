@@ -91,6 +91,15 @@ var config = {
       itemsCustom: [[0,1]]
     });*/
 
+    // basic carroussel (no Owl)
+		/*var carroussel = new BasicCarroussel(
+			{
+				selector: '.some-selector',
+				auto_play: true,
+				change_slide_time: 4000
+			}
+		);*/
+
     // tabs
 	  /*var most_tabs = new GrouppedTabs(
 			{

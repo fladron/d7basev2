@@ -173,6 +173,85 @@ function debounce(fn, delay) {
     this.init();
 	}
 
+	/**
+	 * Create a basic carroussel
+	 * @params
+	 *   Object options: options for the instance
+	 * @return void
+	 * @Author: felip @ omitsis
+	 * @Author URI: http://www.omitsis.com
+	 *
+	**/
+	BasicCarroussel = function(options){
+		this.selector = options.selector;
+	  this.$obj = $(this.selector);
+	  this.$items = this.$obj.find('.views-row');
+	  this.$nav_list;
+	  this.current_slide = 0;
+	  this.fade_time = 300; // miliseconds
+	  this.auto_play = options.auto_play || true;
+	  this.change_slide_time = options.change_slide_time || 4000; // miliseconds
+	  this.timer = -1;
+	  
+	  var self = this;
 
+	  this.init = function(){
+	  	if (self.$obj.length){
+	  		self.$obj.attr('data-js','true');
+		  	self.$obj.append('<div class="nav-list"><ul /></div>');
+		    self.$nav_list = self.$obj.find('.nav-list > ul');
+		    self.prepareNavList();
+		    self.prepareInteraction();
+		    self.prepareMotion();
+	  	}
+	  };
+	  this.prepareNavList = function(){
+	  	self.$items.each(function(i){
+	  		var $item = $(this).find('.image-and-content');
+	  		var url = $item.attr('href');
+	  		var title = $item.find('> .content h2').text();
+	  		self.$nav_list.append('<li data-index="'+i+'"><h2><a href="'+url+'">'+title+'</a></h2></li>');
+	  	});
+	  };
+	  this.prepareInteraction = function(){
+	  	self.$nav_list.find('li').mouseover(function(e){
+	  		self.pauseMotion();
+	  		var index = $(this).attr('data-index');
+	  		self.selectItem(index);
+	  	});
+
+			self.selectItem(self.current_slide);
+	  };
+	  this.selectItem = function(index){
+	  	self.$items.each(function(i){
+	  		var nav_item = self.$nav_list.find('> li').eq(i);
+	  		if (i != index){
+	  			$(this).attr('data-current', 'false');
+	  			nav_item.attr('data-current', 'false');
+					$(this).fadeOut(self.fade_time);
+	  		}else{
+	  			$(this).attr('data-current', 'true');
+	  			nav_item.attr('data-current', 'true');
+	  			$(this).fadeIn(self.fade_time);
+	  		}
+	  	});
+
+	  	self.current_slide = index;
+	  };
+	  this.prepareMotion = function(){
+	  	self.timer = setInterval(self.nextSlide, self.change_slide_time);
+	  };
+	  this.nextSlide = function(e){
+	  	var future_slide = self.current_slide + 1;
+	  	if (future_slide >= self.$items.length) future_slide = 0;
+	  	self.selectItem(future_slide);
+	  };
+	  this.pauseMotion = function(){
+			if (self.timer != -1) clearInterval(self.timer);
+	  };
+
+	  // initiate!
+    this.init();
+	}
 
 })(jQuery);
