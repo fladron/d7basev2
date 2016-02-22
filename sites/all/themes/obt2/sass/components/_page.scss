@@ -55,6 +55,29 @@
   }
 }
 
+/* collapsible items */
+.collapsible {
+  .collapsible-btn {
+    position: relative;
+    width: 100%;
+    display: block;
+    cursor: pointer;
+    &:after {
+      @include iconize(-200px, -25px, 1, 1);
+      content: " ";
+      position: absolute;
+      top: 4px;
+      right: 2px;
+    }
+  }
+  .collapsible-inner {}
+  &[data-status="closed"] {
+    .collapsible-btn:after {
+      background-position: -200px 0;
+    }
+  }
+}
+
 /* page */
 #page {
 

@@ -254,4 +254,68 @@ function debounce(fn, delay) {
     this.init();
 	}
 
+	/**
+	 * Creates a simple collapsible item
+	 * @params
+	 *   Object options: options for the instance
+	 *     - jQuery obj: jquery instance to be made collapsible, mandatory
+	 *     - String btnSelector: selector of the button that makes the collapse action, mandatory
+	 *     - String collapsibleSelector: selector of the element that collapses/uncollapses, mandatory
+	 *     - Boolean startFolded: true if starts folded, or false otherwise
+	 *     - Integer speed: the speed in miliseconds the folding animation lasts
+	 * @return void
+	 * @Author: felip @ Omitsis SL
+	 * @Author URI: http://www.omitsis.com
+	 *
+	**/
+	SimpleCollapsible = function(options){
+    this.$obj = options.obj;
+    this.$btn = this.$obj.find(options.btnSelector);
+    this.$collapsible = this.$obj.find(options.collapsibleSelector);
+    this.collapsed = (options.startFolded !== 'undefined')? options.startFolded : false;
+    this.anim_speed = (options.speed !== 'undefined')? options.speed : 300;
+
+    var self = this;
+
+    this.init = function(){
+      self.$obj.addClass('collapsible');
+      self.$btn.addClass('collapsible-btn');
+      self.$collapsible.addClass('collapsible-inner');
+      self.$obj.attr('data-status', 'open');
+      if (self.collapsed) self.collapse();
+      self.prepareInteraction();
+      return self.$obj;
+    };
+
+    this.prepareInteraction = function(){
+      self.$btn.click(function(e){
+        e.preventDefault();
+        self.toggleCollapse();
+      });
+    };
+
+    this.toggleCollapse = function(){
+      if (self.collapsed){
+        self.uncollapse();
+    	}else{
+        self.collapse();
+      }
+    };
+
+    this.collapse = function(){
+      self.collapsed = true;
+      self.$obj.attr('data-status', 'closed');
+      self.$collapsible.slideUp(self.anim_speed);
+    };
+
+    this.uncollapse = function(){
+      self.collapsed = false;
+      self.$obj.attr('data-status', 'open');
+      self.$collapsible.slideDown(self.anim_speed);
+    };
+
+    // initiate!
+    this.init();
+	};
+
 })(jQuery);

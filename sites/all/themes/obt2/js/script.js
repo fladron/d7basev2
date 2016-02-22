@@ -107,6 +107,18 @@ var config = {
 		  	block_name: id-name-for-the-block'
 		  }
 		);*/
+
+		// collapsible containers
+		/*$('.some-collapsible-containers').each(function(i){
+			var collapsible = new SimpleCollapsible(
+				{
+					obj: $(this), 
+					btnSelector: '> legend',
+					collapsibleSelector: '> .fieldset-wrapper',
+					startFolded: true
+				}
+			);
+		});*/
 	});
 
 	// ON LOAD
