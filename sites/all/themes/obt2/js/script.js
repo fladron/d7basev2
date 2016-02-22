@@ -94,8 +94,8 @@ var config = {
     // tabs
 	  /*var most_tabs = new GrouppedTabs(
 			{
-		    selector: '.pane-omitsis-weloba-most-block .most-block',
-		  	block_name: 'tabs-most'
+		    selector: '.some-selector',
+		  	block_name: id-name-for-the-block'
 		  }
 		);*/
 	});
