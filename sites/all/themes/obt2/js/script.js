@@ -90,6 +90,14 @@ var config = {
       paginationSpeed: 400,
       itemsCustom: [[0,1]]
     });*/
+
+    // tabs
+	  /*var most_tabs = new GrouppedTabs(
+			{
+		    selector: '.pane-omitsis-weloba-most-block .most-block',
+		  	block_name: 'tabs-most'
+		  }
+		);*/
 	});
 
 	// ON LOAD

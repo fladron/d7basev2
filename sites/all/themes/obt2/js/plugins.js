@@ -168,6 +168,9 @@ function debounce(fn, delay) {
 	      });
 	    });
 	  };
+
+	  // initiate!
+    this.init();
 	}
 
 
