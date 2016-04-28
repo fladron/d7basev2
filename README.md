@@ -13,19 +13,15 @@ Use drush for the following modules list to upload and enable them, like this (i
 
   > drush en -y MODULE_NAME_LIST
 
+**Be careful with libraries and server modules dependencies:**
+
 Core-ish MODULE_NAME_LIST:
 
-  > admin_menu admin_views adminimal_admin_menu adminimal_theme chosen ckeditor ctools date entity entity_translation entityconnect entityreference field_group honeypot i18n imce jquery_update l10n_update libraries link  module_filter nodequeue pathauto title token transliteration variable views views_bulk_operations
-
-Core-ish LIBRARIES:
-
-  > Jcrop
-  > json2
-  > chosen
+  > admin_menu admin_views adminimal_admin_menu adminimal_theme ckeditor ctools date devel entity entity_translation entityconnect entityreference field_group honeypot i18n imce jquery_update l10n_update libraries link module_filter nodequeue pathauto title token transliteration variable views views_bulk_operations
 
 Optional modules:
-- devel
 - epsacrop
+- smtp OR elastic_email mailsystem
 - media media_browser_plus media_vimeo media_youtube
 - file_entity
 - search_api search_api_autocomplete search_api_db facetapi
@@ -34,7 +30,6 @@ Optional modules:
 - xmlsitemap
 - metatag
 - webform webform_localization
-- mandrill mailsystem + mandrill library
 - flag
 - cdn
 - addressfield geocoder geofield geophp
@@ -42,6 +37,9 @@ Optional modules:
 - views_datasource
 - role_delegation
 - views_tree
+- memcache entitycache
+- imagemagick
+- chosen
 
 Security recommendations
 ------------------------
