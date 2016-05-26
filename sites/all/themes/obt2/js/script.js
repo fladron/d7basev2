@@ -104,7 +104,7 @@ var config = {
 	  /*var most_tabs = new GrouppedTabs(
 			{
 		    selector: '.some-selector',
-		  	block_name: id-name-for-the-block'
+		  	block_name: 'id-name-for-the-block'
 		  }
 		);*/
 
