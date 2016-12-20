@@ -6,7 +6,7 @@
     "node": "~4.4.5",
     "npm": "~2.15.5"
   },
-  "dev-dependencies": {
+  "devDependencies": {
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^3.1.0",
     "gulp-sass": "^2.3.2",
