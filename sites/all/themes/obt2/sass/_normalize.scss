@@ -17,10 +17,11 @@
 
 /* Box Sizing: Border box */
 html {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
+
 *, *:before, *:after {
-  box-sizing: inherit;
+    box-sizing: inherit;
 }
 
 /**
@@ -39,14 +40,14 @@ main,
 nav,
 section,
 summary {
-  display: block;
+    display: block;
 }
 
 /* Correct `inline-block` display not defined in IE 8/9. */
 audio,
 canvas,
 video {
-  display: inline-block;
+    display: inline-block;
 }
 
 /**
@@ -54,13 +55,13 @@ video {
  * Remove excess height in iOS 5 devices.
  */
 audio:not([controls]) {
-  display: none;
-  height: 0;
+    display: none;
+    height: 0;
 }
 
 /* Address styling not present in IE 8/9. */
 [hidden] {
-  display: none;
+    display: none;
 }
 
 /**
@@ -69,20 +70,20 @@ audio:not([controls]) {
  *    user zoom.
  */
 html {
-  font-family: $base-font-family; /* 1 */
-  -ms-text-size-adjust: 100%; /* 2 */
-  -webkit-text-size-adjust: 100%; /* 2 */
-  height: 100%;
-  // font smoothing
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    font-family: $base-font-family; /* 1 */
+    -ms-text-size-adjust: 100%; /* 2 */
+    -webkit-text-size-adjust: 100%; /* 2 */
+    height: 100%;
+    // font smoothing
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  margin: 0;
-  padding: 0;
-  color: $body_color;
-  background: $body_background;
+    margin: 0;
+    padding: 0;
+    color: $body_color;
+    background: $body_background;
 }
 
 /**
@@ -92,29 +93,32 @@ body {
  * http://meyerweb.com/eric/thoughts/2007/06/11/who-ordered-the-link-states
  */
 a:link {
-  color: $link_color;
-  text-decoration: none;
+    color: $link_color;
+    text-decoration: none;
 }
+
 a:visited {
-  color: $link_color;
+    color: $link_color;
 }
+
 a:hover,
 a:focus {
-  color: $link_hover_color;
+    color: $link_hover_color;
 }
+
 a:active {
-  color: $link_hover_color;
+    color: $link_hover_color;
 }
 
 /* Address `outline` inconsistency between Chrome and other browsers. */
 a:focus {
-  outline: thin dotted;
+    outline: thin dotted;
 }
 
 /* Improve readability when focused and also mouse hovered in all browsers. */
 a:active,
 a:hover {
-  outline: 0;
+    outline: 0;
 }
 
 /**
@@ -122,47 +126,47 @@ a:hover {
  */
 p,
 pre {
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 1.25;
-  margin: 0 0 .5em;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.25;
+    margin: 0 0 .5em;
 }
 
 h1, h2, h3, h4 {
-  margin: 0;
-  padding: 0;
-  text-transform: uppercase;
+    margin: 0;
+    padding: 0;
+    text-transform: uppercase;
 }
 
 /* Address styling not present in IE 8/9, Safari 5, and Chrome. */
 abbr[title] {
-  border-bottom: 1px dotted;
+    border-bottom: 1px dotted;
 }
 
 /* Address style set to `bolder` in Firefox 4+, Safari 5, and Chrome. */
 b,
 strong {
-  font-weight: bold;
+    font-weight: bold;
 }
 
 /* Address styling not present in Safari 5 and Chrome. */
 dfn {
-  font-style: italic;
+    font-style: italic;
 }
 
 /* Address differences between Firefox and other browsers. */
 hr {
-  box-sizing: content-box;
-  height: 0;
-  border: 1px solid #666;
-  padding-bottom: -1px;
-  margin: rhythm(1) 0;
+    box-sizing: content-box;
+    height: 0;
+    border: 1px solid #666;
+    padding-bottom: -1px;
+    margin: rhythm(1) 0;
 }
 
 /* Address styling not present in IE 8/9. */
 mark {
-  background: #ff0;
-  color: #000;
+    background: #ff0;
+    color: #000;
 }
 
 /* Correct font family set oddly in Safari 5 and Chrome. */
@@ -172,37 +176,39 @@ pre,
 samp,
 tt,
 var {
-  font-family: $font-monospace; // The value of $font-monospace ends with ", serif".
+    font-family: $font-monospace; // The value of $font-monospace ends with ", serif".
 }
 
 /* Improve readability of pre-formatted text in all browsers. */
 pre {
-  white-space: pre-wrap;
+    white-space: pre-wrap;
 }
 
 /* Set consistent quote types. */
 q {
-  quotes: "\201C" "\201D" "\2018" "\2019";
+    quotes: "\201C" "\201D" "\2018" "\2019";
 }
 
 /* Address inconsistent and variable font size in all browsers. */
 small {
-  font-size: 80%;
+    font-size: 80%;
 }
 
 /* Prevent `sub` and `sup` affecting `line-height` in all browsers. */
 sub,
 sup {
-  font-size: 75%;
-  line-height: 0;
-  position: relative;
-  vertical-align: baseline;
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
 }
+
 sup {
-  top: -0.5em;
+    top: -0.5em;
 }
+
 sub {
-  bottom: -0.25em;
+    bottom: -0.25em;
 }
 
 /**
@@ -211,14 +217,14 @@ sub {
 dl,
 ol,
 ul {
-  margin: 0;
-  padding: 0;
+    margin: 0;
+    padding: 0;
 }
 
 ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
 /**
@@ -227,25 +233,25 @@ ul {
  * @todo Look into adding responsive embedded video.
  */
 img {
-  /* Remove border when inside `a` element in IE 8/9. */
-  border: 0;
-  /* Responsive images */
-  display: inline-block;
-  max-width: 100%;
-  height: auto;
-  vertical-align: middle;
-  /* Correct IE 8 not scaling image height when resized. */
-  width: auto;
+    /* Remove border when inside `a` element in IE 8/9. */
+    border: 0;
+    /* Responsive images */
+    display: inline-block;
+    max-width: 100%;
+    height: auto;
+    vertical-align: middle;
+    /* Correct IE 8 not scaling image height when resized. */
+    width: auto;
 }
 
 /* Correct overflow displayed oddly in IE 9. */
 svg:not(:root) {
-  overflow: hidden;
+    overflow: hidden;
 }
 
 /* Address margin not present in IE 8/9 and Safari 5. */
 figure {
-  margin: 0;
+    margin: 0;
 }
 
 /**
@@ -257,8 +263,8 @@ figure {
  * 2. Remove padding so people aren't caught out if they zero out fieldsets.
  */
 legend {
-  border: 0; /* 1 */
-  padding: 0; /* 2 */
+    border: 0; /* 1 */
+    padding: 0; /* 2 */
 }
 
 /**
@@ -270,10 +276,10 @@ button,
 input,
 select,
 textarea {
-  font-family: inherit; /* 1 */
-  font-size: 100%; /* 2 */
-  margin: 0; /* 3 */
-  max-width: 100%; /* 5 */
+    font-family: inherit; /* 1 */
+    font-size: 100%; /* 2 */
+    margin: 0; /* 3 */
+    max-width: 100%; /* 5 */
 }
 
 /**
@@ -282,7 +288,7 @@ textarea {
  */
 button,
 input {
-  line-height: normal;
+    line-height: normal;
 }
 
 /**
@@ -293,7 +299,7 @@ input {
  */
 button,
 select {
-  text-transform: none;
+    text-transform: none;
 }
 
 /**
@@ -307,8 +313,8 @@ button,
 html input[type="button"], /* 1 */
 input[type="reset"],
 input[type="submit"] {
-  -webkit-appearance: button; /* 2 */
-  cursor: pointer; /* 3 */
+    -webkit-appearance: button; /* 2 */
+    cursor: pointer; /* 3 */
 }
 
 /**
@@ -316,7 +322,7 @@ input[type="submit"] {
  */
 button[disabled],
 html input[disabled] {
-  cursor: default;
+    cursor: default;
 }
 
 /**
@@ -324,7 +330,7 @@ html input[disabled] {
  */
 input[type="checkbox"],
 input[type="radio"] {
-  padding: 0; /* 2 */
+    padding: 0; /* 2 */
 }
 
 /**
@@ -333,8 +339,8 @@ input[type="radio"] {
  *    (include `-moz` to future-proof).
  */
 input[type="search"] {
-  -webkit-appearance: textfield; /* 1 */
-  box-sizing: content-box; /* 2 */
+    -webkit-appearance: textfield; /* 1 */
+    box-sizing: content-box; /* 2 */
 }
 
 /**
@@ -343,14 +349,14 @@ input[type="search"] {
  */
 input[type="search"]::-webkit-search-cancel-button,
 input[type="search"]::-webkit-search-decoration {
-  -webkit-appearance: none;
+    -webkit-appearance: none;
 }
 
 /* Remove inner padding and border in Firefox 4+. */
 button::-moz-focus-inner,
 input::-moz-focus-inner {
-  border: 0;
-  padding: 0;
+    border: 0;
+    padding: 0;
 }
 
 /**
@@ -358,23 +364,23 @@ input::-moz-focus-inner {
  * 2. Improve readability and alignment in all browsers.
  */
 textarea {
-  overflow: auto; /* 1 */
-  vertical-align: top; /* 2 */
+    overflow: auto; /* 1 */
+    vertical-align: top; /* 2 */
 }
 
 /* Drupal-style form labels. */
 label {
-  display: block;
-  font-weight: bold;
+    display: block;
+    font-weight: bold;
 }
 
 /**
  * Tables
  */
 table {
-  /* Remove most spacing between table cells. */
-  border-collapse: collapse;
-  border-spacing: 0;
-  /* Prevent cramped-looking tables */
-  width: 100%;
+    /* Remove most spacing between table cells. */
+    border-collapse: collapse;
+    border-spacing: 0;
+    /* Prevent cramped-looking tables */
+    width: 100%;
 }

@@ -10,44 +10,44 @@
 /* element-invisible as defined by http://snook.ca/archives/html_and_css/hiding-content-for-accessibility */
 .element-invisible,
 %element-invisible {
-  @include element-invisible;
+    @include element-invisible;
 }
 
 /* Turns off the element-invisible effect. */
 %element-invisible-off {
-  @include element-invisible-off;
+    @include element-invisible-off;
 }
 
 .element-focusable,
 %element-focusable {
-  @extend %element-invisible;
+    @extend %element-invisible;
 
-  &:active,
-  &:focus {
-    @extend %element-invisible-off;
-  }
+    &:active,
+    &:focus {
+        @extend %element-invisible-off;
+    }
 }
 
 /* primary tabs */
 .tabs-primary {
-  @extend %clearfix;
-  margin: 20px 0;
-  padding-left: 2px;
-  border-bottom: 1px solid #999;
-  li {
-    float: left;
-    font-size: 14px;
-    margin: 0 2px;
-    position: relative;
-    top: 1px;
-    a {
-      display: block;
-      padding: .3em .5em;
-      background: white;
-      border: 1px solid #999;
-      border-bottom: none;
+    @extend %clearfix;
+    margin: 20px 0;
+    padding-left: 2px;
+    border-bottom: 1px solid #999;
+    li {
+        float: left;
+        font-size: 14px;
+        margin: 0 2px;
+        position: relative;
+        top: 1px;
+        a {
+            display: block;
+            padding: .3em .5em;
+            background: white;
+            border: 1px solid #999;
+            border-bottom: none;
+        }
     }
-  }
 }
 
 /**
@@ -55,16 +55,16 @@
  */
 
 .form-item {
-  margin-bottom: 20px;
+    margin-bottom: 20px;
 }
 
 label {
-  margin-bottom: .4em;
+    margin-bottom: .4em;
 }
 
 /* buttons */
 a[data-action], input[type="submit"], input[type="button"], button {
-  @include buttonize;
+    @include buttonize;
 }
 
 input[type="submit"][disabled], input[type="button"][disabled] {
@@ -82,6 +82,7 @@ input[type="radio"]:checked {
     position: absolute;
     left: -9999px;
 }
+
 input[type="radio"]:not(:checked) + label,
 input[type="radio"]:checked + label {
     position: relative;
@@ -91,55 +92,65 @@ input[type="radio"]:checked + label {
     width: 30px;
     height: 30px;
 }
-    /* circle */
-    input[type="radio"]:not(:checked) + label:before,
-    input[type="radio"]:checked + label:before {
-        display: block;
-        width: 100%;
-        height: 100%;
-        border: 1px solid white;
-        border-radius: 50%;
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        transition: all .2s;
-    }
-    /* checked circle */
-    input[type="radio"]:not(:checked) + label:after,
-    input[type="radio"]:checked + label:after {
-        display: block;
-        width: 12px;
-        height: 12px;
-        background: $theme_grey;
-        border-radius: 50%;
-        content: '';
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        margin-left: -6px;
-        margin-top: -6px;
-        transition: all .2s;
-    }
+
+/* circle */
+input[type="radio"]:not(:checked) + label:before,
+input[type="radio"]:checked + label:before {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 1px solid white;
+    border-radius: 50%;
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: all .2s;
+}
+
+/* checked circle */
+input[type="radio"]:not(:checked) + label:after,
+input[type="radio"]:checked + label:after {
+    display: block;
+    width: 12px;
+    height: 12px;
+    background: $theme_grey;
+    border-radius: 50%;
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -6px;
+    margin-top: -6px;
+    transition: all .2s;
+}
+
 /* disabled radio */
-input[type="radio"]:disabled {}
-    input[type="radio"]:disabled + label {
-        color: #aaa;
-    }
-    input[type="radio"]:disabled + label:before {
-        opacity: .4;
-    }
-    input[type="radio"]:disabled + label:after {
-        opacity: .4;
-    }
+input[type="radio"]:disabled {
+}
+
+input[type="radio"]:disabled + label {
+    color: #aaa;
+}
+
+input[type="radio"]:disabled + label:before {
+    opacity: .4;
+}
+
+input[type="radio"]:disabled + label:after {
+    opacity: .4;
+}
+
 /* checked mark changes */
 input[type="radio"]:not(:checked) + label:after {
     opacity: 0;
 }
+
 input[type="radio"]:not(:checked) + label:hover:after,
 input[type="radio"]:checked + label:after {
     opacity: 1;
 }
+
 input[type="radio"]:checked + label:after {
     background: white;
 }
