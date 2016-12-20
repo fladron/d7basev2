@@ -1,31 +1,19 @@
 //
-// Initialization partial
+// Initialization
 //
-// To make it easier to use all variables and mixins in any Sass file in this
-// theme, each .scss file has a @import "init" declaration. And this _init.scss
-// file is in charge of importing all the other partials needed for the theme.
-//
-// This initialization partial is organized in this way:
-// - First we set any shared Sass variables.
-// - Next we import Compass plug-ins (Sass mixin libraries).
-// - Last we define our custom mixins for this theme.
-//
-
 
 // =============================================================================
 // Variables
 // =============================================================================
 
-$theme_name: "obt2";
-$path_to_theme: "/sites/all/themes/#{$theme_name}";
-
-//
-// Legacy IE support
-//
-// IE7 and below not supported. 
-// If need to be IE7- compatible, uncomment the next line and complete the box-sizing line on the top of normalize.scss, like in https://github.com/Schepp/box-sizing-polyfill
-//$box-sizing-polyfill-path: "#{$path_to_theme}/js/vendor/boxsizing.htc";
-
+// Layout
+$page_inner_maxwidth: 1200px;
+// Responsive breakpoints, change these as you see fit
+$mobile_menu_min_width: 850px;
+$medium_screen_width: 800px;
+$small_screen_width: 640px;
+$micro_screen_width: 480px;
+$nano_screen_width: 320px;
 
 //
 // Font faces, stacks and sizes.
@@ -37,48 +25,40 @@ $base-line-height: 1.4;
 // fonts which are common fonts available on most computer systems. The DejaVu
 // and Nimbus Sans fonts are commonly available on Linux systems where the MS
 // fonts are less common. Tahoma and Helvetica are also widely available.
-//
-// A user's web browser will look at the comma-separated list and will
-// attempt to use each font in turn until it finds one that is available
-// on the user's computer. The final "generic" font (sans-serif, serif or
-// monospace) hints at what type of font to use if the web browser doesn't
-// find any of the fonts in the list.
 
 // First, let's create some font stacks.
-$my_font: "My font", Helvetica, Arial, sans-serif;
+$my_font: "Open Sans", Helvetica, Arial, sans-serif;
 
+// sans serif fonts
 $verdana:         Verdana, Tahoma, "DejaVu Sans", sans-serif;
 $tahoma:          Tahoma, Verdana, "DejaVu Sans", sans-serif;
 $helvetica:       Helvetica, Arial, "Nimbus Sans L", sans-serif;
 $arial:           Arial, Helvetica, "Nimbus Sans L", sans-serif;
-
+// serif fonts
 $times-new-roman: "Times New Roman", Times, Georgia, "DejaVu Serif", serif;
 $times:           Times, "Times New Roman", Georgia, "DejaVu Serif", serif;
 $georgia:         Georgia, "Times New Roman", "DejaVu Serif", serif;
 
-// For an explanation of why "sans-serif" is at the end of this list, see
+// For an explanation of why "monospace" is at the end of this list, see
 // http://meyerweb.com/eric/thoughts/2010/02/12/fixed-monospace-sizing/
 $courier:         "Courier New", "DejaVu Sans Mono", monospace, sans-serif;
 
 // Now create some variables for the font stacks we want to use on this site.
 $base-font-family: $my_font; // The font family set on the html element.
-$font-body:        $my_font;
 $font-monospace:   $courier;
 
 
 // theme colors
-$theme_red: #e4342b;
-
+$theme_grey: #666;
+$theme_grey_light: #999;
+$theme_grey_dark: #333;
+// color binding
+$link_color: $theme_grey;
+$link_hover_color: $theme_grey_light;
+$body_background: #FFF;
+$body_color: $theme_grey_dark;
 
 // =============================================================================
 // Partials to be shared with all .scss files.
 // =============================================================================
-
-// Add Compass' IE and vendor prefix support variables.
-@import "compass/support";
-// Better than Drupal's clearfix.
-@import "compass/utilities/general/clearfix";
-// Use one CSS3 mixin instead of multiple vendor prefixes.
-@import "compass/css3";
-// Now we add our custom helper mixins.
 @import "mixins";

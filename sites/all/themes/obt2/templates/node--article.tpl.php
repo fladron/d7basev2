@@ -11,14 +11,20 @@
     <?php if (isset($title)){ ?>
     <header>
       <h1><?php print $title; ?></h1>
+      <?php 
+      /**
+       * A more customized way to render a field (the creation date), with some control done through template.php's obt_preprocess_node function (look for $vars['creation_date'])
+       */ ?>
+      <time datetime="<?php print $creation_date; ?>"><?php print $creation_date; ?></time>
     </header>
     <?php } ?>
     <div class="content">
-    <?php /*
-          * A simple render of a field (the body field), no control whatsoever, as it is configured in the content type's Manage display tab.
-          * If some control is needed, it must be done through template.php's obt_preprocess_node function
-          */ ?>
+      <?php 
+      /**
+       * The simplest way to render a field (body and tags), related to the Content type's Manage display form
+       */ ?>
       <?php print render($content['body']); ?>
+      <?php print render($content['field_tags']); ?>
     </div>
   <?php } ?>
 </<?php print $tag; ?>> <!-- /node-->

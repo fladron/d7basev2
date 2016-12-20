@@ -1,11 +1,11 @@
-name        = SITEID theme
-description = Theme for the SITEID website, based on the OBT2, a theme compatible with Sass, loosely based on the Zen theme
+name        = OBT
+description = Boilerplate Theme for a Drupal 7 site: a theme compatible with Sass, loosely based on the Zen theme
 screenshot  = screenshot.jpg
 
 
 ; This theme is compatible with Drupal 7 core
 core    = 7.x
-version = 2.0
+version = 2.1.0
 
 
 ; First we remove the system's menu and message styling since our theme will take care of it

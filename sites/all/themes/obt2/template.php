@@ -7,30 +7,13 @@
  * @see https://drupal.org/node/1728096
  */
 
-
-/**
- * Override or insert variables into the maintenance page template.
- *
- * @param $vars
- *   An array of variables to pass to the theme template.
- */
-/* -- Delete this line if you want to use this function
-function obt2_preprocess_maintenance_page(&$vars) {
-  // When a variable is manipulated or added in preprocess_html or
-  // preprocess_page, that same work is probably needed for the maintenance page
-  // as well, so we can just re-use those functions to do that work here.
-  obt2_preprocess_html($vars, $hook);
-  obt2_preprocess_page($vars, $hook);
-}
-// */
-
 /**
  * Override or insert variables into the html templates.
  *
  * @param $vars
  *   An array of variables to pass to the theme template.
  */
-function obt2_preprocess_html(&$vars) {
+function obt_preprocess_html(&$vars) {
   $vars['environment'] = variable_get('environment', 'dev');
 
   if ($vars['is_front']) {
@@ -70,14 +53,8 @@ function obt2_preprocess_html(&$vars) {
     $vars['classes_array'][] = drupal_html_class('section-' . $section);
   }
 
-  // external styles
-  drupal_add_css('//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css', array('type' => 'external', 'group' => CSS_THEME));
-
-  // external scripts
-  drupal_add_js(base_path() . path_to_theme() . '/js/vendor/modernizr.custom.87176.js', array('group' => JS_LIBRARY));
-
   // Touch screen icons
-  /*$icon =  array(
+  $icon =  array(
     '#tag' => 'link',
     '#attributes' => array(
       'href' => base_path() . path_to_theme() . '/touch-icon.png',
@@ -96,15 +73,15 @@ function obt2_preprocess_html(&$vars) {
       ),
     );
     drupal_add_html_head($icon, 'meta_touch_icon_' . $size);
-  }*/
+  }
 
   // Page formats
   // if is body, print just the contents of the body, without anything else (to use in async calls that also need the wrapping)
-  $vars['is_format_body'] = obt2_is_format('body');
+  $vars['is_format_body'] = obt_is_format('body');
   // if is oasync, print just the content, without anything else (pure data to use in async calls)
-  $vars['is_format_ajax'] = obt2_is_format('oasync');
+  $vars['is_format_ajax'] = obt_is_format('oasync');
   // if is oasis, print just the content and also styles (<head>) and scripts (useful for an overlay showing just the content but with styles)
-  $vars['is_format_oasis'] = obt2_is_format('oasis');
+  $vars['is_format_oasis'] = obt_is_format('oasis');
 }
 
 /**
@@ -115,12 +92,12 @@ function obt2_preprocess_html(&$vars) {
  * @param $hook
  *   The name of the template being rendered ("html" in this case.)
  */
-function obt2_process_html(&$vars, $hook) {
+function obt_process_html(&$vars, $hook) {
   // Flatten out html_attributes.
   $vars['html_attributes'] = drupal_attributes($vars['html_attributes_array']);
 }
 
-function obt2_is_format($format){
+function obt_is_format($format){
   return (arg(0) == $format || (isset($_GET[$format]) && $_GET[$format] == '1'));
 }
 
@@ -130,7 +107,7 @@ function obt2_is_format($format){
  * @param $vars
  *   An array of variables to pass to the theme template.
  */
-function obt2_preprocess_page(&$vars) {
+function obt_preprocess_page(&$vars) {
   // Error pages templating
   $header = drupal_get_http_header("status");
   if($header == "404 Not Found" || $header == "403 Forbidden" || $header == "500 Internal server error") {
@@ -140,17 +117,17 @@ function obt2_preprocess_page(&$vars) {
   }
 
   // Page formats
-  $vars['is_format_ajax'] = obt2_is_format('oasync');
-  $vars['is_format_oasis'] = obt2_is_format('oasis');
+  $vars['is_format_ajax'] = obt_is_format('oasync');
+  $vars['is_format_oasis'] = obt_is_format('oasis');
 
   // Adding classes if it has navigation
   if (!empty($vars['page']['navigation'])) {
     $vars['classes_array'][] = 'with-navigation';
   }
 
-  // must show title
+  // the page shall not show title, as its the node tpl who shows it
   $vars['must_show_title'] = FALSE;
-  if (arg(0) == 'contact') {
+  if (arg(0) == 'contact' || arg(0) == 'search') {
     $vars['must_show_title'] = TRUE;
   }
 
@@ -168,10 +145,10 @@ function obt2_preprocess_page(&$vars) {
  * @param $vars
  *   An array of variables to pass to the theme template.
  */
-function obt2_preprocess_region(&$vars) {
+function obt_preprocess_region(&$vars) {
   // Page formats
-  $vars['is_format_ajax'] = obt2_is_format('oasync');
-  $vars['is_format_oasis'] = obt2_is_format('oasis');
+  $vars['is_format_ajax'] = obt_is_format('oasync');
+  $vars['is_format_oasis'] = obt_is_format('oasis');
 
   // Use a template with no wrapper for this cases
   if ($vars['region'] == 'content') {
@@ -185,34 +162,22 @@ function obt2_preprocess_region(&$vars) {
  * @param $vars
  *   An array of variables to pass to the theme template.
  */
-function obt2_preprocess_node(&$vars) {
+function obt_preprocess_node(&$vars) {
   $node_obj = $vars['elements']['#node'];
 
   // Add view mode class (if not teaser, because it already has it)
-  //if ($vars['view_mode'] != 'teaser') $vars['classes_array'][] = 'node-' . $vars['view_mode'];
+  if ($vars['view_mode'] != 'teaser') $vars['classes_array'][] = 'node-' . $vars['view_mode'];
 
-  // entity title
+  // remove the title for the Home node detail
   if ($vars['view_mode'] == 'full'){
     if (drupal_is_front_page()){
       unset($vars['title']);
-    }else{
-      $entity_title = field_get_items('node', $node_obj, 'title_field');
-      if (isset($entity_title[0]['safe_value'])){
-        $vars['title'] = $entity_title[0]['safe_value'];
-      }
     }
   }
 
-  // body and summary
-  $body = field_get_items('node', $node_obj, 'body');
-  if (isset($body[0]['safe_value'])){
-    $vars['node_body_html'] = $body[0]['safe_value'];
-    $summary = $body[0]['safe_value'];
-    if (isset($body[0]['safe_summary']) && $body[0]['safe_summary'] != ''){
-      $summary = $body[0]['safe_summary'];
-    }
-    $vars['node_body_summary_html'] = oh_truncate($summary, 160);
-  }
+  /* 
+   * Below we can put some nice handcrafted control for the fields that need it
+   */
 
   // other type specific fields
   switch ($vars['type']) {
@@ -224,9 +189,9 @@ function obt2_preprocess_node(&$vars) {
         }*/
       }
       break;
-    case 'post':
+    case 'article':
       if ($vars['view_mode'] == 'full') {
-        $vars['creation_date'] = oh_get_date_array($vars['created'], 'day', $is_timestamp = TRUE);
+        $vars['creation_date'] = format_date($vars['created'], 'short');
       }
       break;
   }
@@ -240,7 +205,7 @@ function obt2_preprocess_node(&$vars) {
  * @param $hook
  *   The name of the template being rendered ("comment" in this case.)
  */
-function obt2_preprocess_comment(&$vars) {
+function obt_preprocess_comment(&$vars) {
   /*$comment = $vars['elements']['#comment'];
   $vars['picture'] = theme('user_picture', array('account' => $comment));*/
 }
@@ -253,7 +218,7 @@ function obt2_preprocess_comment(&$vars) {
  * @param $hook
  *   The name of the template being rendered ("block" in this case.)
  */
-function obt2_preprocess_block(&$vars, $hook) {
+function obt_preprocess_block(&$vars, $hook) {
   // is this a navigation block
   $vars['is_navigation'] = FALSE;
   if ($vars['block']->module == 'menu' || in_array($vars['block']->delta, array('main-menu'))){
@@ -278,7 +243,7 @@ function obt2_preprocess_block(&$vars, $hook) {
  * @param $vars
  *   An array of variables to pass to the theme template.
  */
-function obt2_preprocess_search_result(&$vars) {
+function obt_preprocess_search_result(&$vars) {
   $node_obj = $vars['result']['node'];
 
 }
@@ -291,20 +256,20 @@ function obt2_preprocess_search_result(&$vars) {
  * @return
  *   A string containing the breadcrumb output.
  */
-function obt2_breadcrumb($vars) {
+function obt_breadcrumb($vars) {
   $breadcrumb = $vars['breadcrumb'];  // Determine if we are to display the breadcrumb.
-  $show_breadcrumb = theme_get_setting('obt2_breadcrumb');
+  $show_breadcrumb = theme_get_setting('obt_breadcrumb');
   if ($show_breadcrumb == 'yes' || ($show_breadcrumb == 'admin' && arg(0) == 'admin')) {
     // Optionally get rid of the homepage link.
-    $show_breadcrumb_home = theme_get_setting('obt2_breadcrumb_home');
+    $show_breadcrumb_home = theme_get_setting('obt_breadcrumb_home');
     if (!$show_breadcrumb_home) {
       array_shift($breadcrumb);
     }
     // Return the breadcrumb with separators.
     if (!empty($breadcrumb)) {
-      $breadcrumb_separator = '<span class="separator">' . theme_get_setting('obt2_breadcrumb_separator') . '</span>';
+      $breadcrumb_separator = '<span class="separator">' . theme_get_setting('obt_breadcrumb_separator') . '</span>';
       $trailing_separator = $title = '';
-      if (theme_get_setting('obt2_breadcrumb_title')) {
+      if (theme_get_setting('obt_breadcrumb_title')) {
         $item = menu_get_item();
         if (!empty($item['tab_parent'])) {
           // If we are on a non-default tab, use the tab's title.
@@ -317,7 +282,7 @@ function obt2_breadcrumb($vars) {
           $trailing_separator = $breadcrumb_separator;
         }
       }
-      elseif (theme_get_setting('obt2_breadcrumb_trailing')) {
+      elseif (theme_get_setting('obt_breadcrumb_trailing')) {
         $trailing_separator = $breadcrumb_separator;
       }
       // Provide a navigational heading to give context for breadcrumb links to
@@ -333,7 +298,7 @@ function obt2_breadcrumb($vars) {
 /**
  * Returns HTML for a marker for new or updated content.
  */
-function obt2_mark($variables) {
+function obt_mark($variables) {
   $type = $variables['type'];
   if ($type == MARK_NEW) {
     return ' <mark class="new">' . t('new') . '</mark>';
@@ -354,7 +319,7 @@ function obt2_mark($variables) {
  *
  * @ingroup themeable
  */
-function obt2_menu_local_tasks(&$variables) {
+function obt_menu_local_tasks(&$variables) {
   $output = '';
 
   // Add theme hook suggestions for tab type.
@@ -389,13 +354,13 @@ function obt2_menu_local_tasks(&$variables) {
  *
  * @ingroup themeable
  */
-function obt2_menu_local_task($variables) {
+function obt_menu_local_task($variables) {
   $type = $class = FALSE;
 
   $link = $variables['element']['#link'];
   $link_text = $link['title'];
 
-  // Check for tab type set in obt2_menu_local_tasks().
+  // Check for tab type set in obt_menu_local_tasks().
   if (is_array($variables['element']['#theme'])) {
     $type = in_array('menu_local_task__secondary', $variables['element']['#theme']) ? 'tabs-secondary' : 'tabs-primary';
   }
@@ -433,7 +398,7 @@ function obt2_menu_local_task($variables) {
 /**
  * Implements hook_preprocess_menu_link().
  */
-function obt2_preprocess_menu_link(&$variables, $hook) {
+function obt_preprocess_menu_link(&$variables, $hook) {
   foreach ($variables['element']['#attributes']['class'] as $key => $class) {
     switch ($class) {
       // Menu module classes.
@@ -466,36 +431,3 @@ function obt2_preprocess_menu_link(&$variables, $hook) {
   }
   array_unshift($variables['element']['#localized_options']['attributes']['class'], 'menu-link');
 }
-
-/**
- * Returns HTML for status and/or error messages, grouped by type.
- */
-function obt2_status_messages($variables) {
-  $display = $variables['display'];
-  $output = '';
-
-  $status_heading = array(
-    'status' => t('Status message'),
-    'error' => t('Error message'),
-    'warning' => t('Warning message'),
-  );
-  foreach (drupal_get_messages($display) as $type => $messages) {
-    $output .= "<div class=\"messages--$type messages $type\">\n";
-    if (!empty($status_heading[$type])) {
-      $output .= '<h2 class="element-invisible">' . $status_heading[$type] . "</h2>\n";
-    }
-    if (count($messages) > 1) {
-      $output .= " <ul class=\"messages-list\">\n";
-      foreach ($messages as $message) {
-        $output .= '  <li class=\"messages-item\">' . $message . "</li>\n";
-      }
-      $output .= " </ul>\n";
-    }
-    else {
-      $output .= $messages[0];
-    }
-    $output .= "</div>\n";
-  }
-  return $output;
-}
-
