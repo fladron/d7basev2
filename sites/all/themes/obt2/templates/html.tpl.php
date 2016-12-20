@@ -22,7 +22,7 @@
 
         <?php print $styles; ?>
         <!--[if lt IE 9]>
-        <script src="<?php print base_path() . path_to_theme(); ?>/node_modules/html5shiv/dist/html5shiv.min.js"></script>
+        <script src="<?php print base_path() . path_to_theme(); ?>/js/dist/html5shiv.min.js"></script>
         <![endif]-->
 
         <?php if (isset($environment) && $environment == 'pro') { ?>
