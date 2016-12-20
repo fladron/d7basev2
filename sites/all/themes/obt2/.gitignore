@@ -1,9 +1,7 @@
 # ignore deploy modules
 node_modules/
 
-# ignore css and sourcemap files
-# we should compile sass in every environment
-css/*.css
+# ignore css sourcemap files
 css/*.css.map
 
 # ignore sass cache
